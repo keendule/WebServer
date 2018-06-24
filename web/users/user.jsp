@@ -9,7 +9,7 @@
 <div class="container h-100">
     <c:set var="user" scope="request" value="${user}"/>
     <div class="row h-100 justify-content-center" style="margin-top: 7rem">
-        <form method="post" action="/user">
+        <form method="post" action="user">
             <input type="hidden" name="action" value="${user == null ? "CREATE" : "UPDATE"}">
             <input type="hidden" name="id" value="${user == null ? "" : user.id}">
             <div class="form-group">
