@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
@@ -6,6 +7,7 @@
 </head>
 <body>
 <div class="container h-100">
+    <c:set var="user" scope="request" value="${user}"/>
     <div class="row h-100 justify-content-center" style="margin-top: 7rem">
         <form method="post" action="/user">
             <input type="hidden" name="action" value="${user == null ? "CREATE" : "UPDATE"}">
@@ -13,17 +15,17 @@
             <div class="form-group">
                 <label for="formGroupExampleInput">Name</label>
                 <input type="text" class="form-control" id="formGroupExampleInput"
-                       placeholder="Enter name" value="${user == null ?"":user.name}" name="name">
+                       placeholder="Enter name" value="${user == null ? "" : user.name}" name="name">
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2">Login</label>
                 <input type="text" class="form-control" id="formGroupExampleInput2"
-                       placeholder="Enter" value="${user == null ?"":user.login}" name="login">
+                       placeholder="Enter" value="${user == null ? "" : user.login}" name="login">
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput3">Password</label>
                 <input type="text" class="form-control" id="formGroupExampleInput3"
-                       placeholder="password" value="${user == null ?"":user.password}" name="password">
+                       placeholder="password" value="${user == null ? "" : user.password}" name="password">
             </div>
             <button type="submit" class="btn btn-primary">${user == null ? "CREATE" : "UPDATE"}</button>
         </form>

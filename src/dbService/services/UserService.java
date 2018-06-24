@@ -38,7 +38,7 @@ public class UserService {
     }
 
     public void updateUser(UsersEntity user) {
-        makeDatabaseTransaction(user, UPDATE);
+        doDatabaseTransaction(user, UPDATE);
     }
 
     public UsersEntity getUser(int id){ //ToDo как быть с исключениями
@@ -55,16 +55,16 @@ public class UserService {
     }
 
     public void deleteUser(UsersEntity user){
-        makeDatabaseTransaction(user, DELETE);
+        doDatabaseTransaction(user, DELETE);
 
     }
 
     public void createUser(UsersEntity user) {
-        makeDatabaseTransaction(user, CREATE);
+        doDatabaseTransaction(user, CREATE);
 
     }
 
-    private void makeDatabaseTransaction(UsersEntity user,DatabaseOperations databaseOperation) {//ToDo возможно ли переделать на лямбду
+    private void doDatabaseTransaction(UsersEntity user, DatabaseOperations databaseOperation) {//ToDo возможно ли переделать на лямбду
         try {
             Session session = sessionFactory.openSession();
             UsersDAO usersDAO = new UsersDAO(session);
