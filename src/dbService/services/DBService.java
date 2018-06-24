@@ -26,7 +26,6 @@ public class DBService  {
         return configuration.buildSessionFactory(serviceRegistry);
     }
 
-
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
