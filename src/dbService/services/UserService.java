@@ -50,6 +50,7 @@ public class UserService {
         UsersEntity user = usersDAO.getUser(id);
 
         session.close();
+
         return user;
 
     }
