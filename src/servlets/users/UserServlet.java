@@ -57,7 +57,7 @@ public class UserServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
         if (id != null) {
-            userService.deleteUser(new UsersEntity(Integer.parseInt(id)));
+            userService.deleteUser((Integer.parseInt(id)));
         }
 
         resp.sendRedirect("/users");

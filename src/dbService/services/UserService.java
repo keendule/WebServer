@@ -55,8 +55,8 @@ public class UserService {
 
     }
 
-    public void deleteUser(UsersEntity user){
-        doDatabaseTransaction(user, DELETE);
+    public void deleteUser(int id){
+        doDatabaseTransaction(new UsersEntity(id), DELETE);
 
     }
 
