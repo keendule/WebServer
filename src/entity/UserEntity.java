@@ -80,7 +80,6 @@ public class UserEntity {
         this.password = builder.password;
     }
 
-
    public static class Builder {
         private int id;
         private String name;
