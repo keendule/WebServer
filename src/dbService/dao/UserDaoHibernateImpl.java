@@ -8,6 +8,9 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+
+import javax.servlet.ServletContext;
+
 import static dbService.services.DatabaseOperations.*;
 
 
@@ -18,8 +21,8 @@ import java.util.*;
 public class UserDaoHibernateImpl implements UserDAO {
     private final SessionFactory sessionFactory;
 
-    public UserDaoHibernateImpl() {
-        this.sessionFactory = DBHelper.getSessionFactory();
+    public UserDaoHibernateImpl(ServletContext servletContext) {
+        this.sessionFactory = DBHelper.getSessionFactory(servletContext);
     }
 
     public List<UserEntity> getAllUsers() {
