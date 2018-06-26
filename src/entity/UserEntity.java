@@ -72,7 +72,7 @@ public class UserEntity {
 
     }
 
-    public UserEntity(Builder builder) {
+    private UserEntity(Builder builder) {
 
         this.id = builder.id;
         this.name = builder.name;
@@ -80,12 +80,6 @@ public class UserEntity {
         this.password = builder.password;
     }
 
-    public UserEntity(String name, String login, String password) {
-
-        this.name = name;
-        this.login = login;
-        this.password = password;
-    }
 
    public static class Builder {
         private int id;
