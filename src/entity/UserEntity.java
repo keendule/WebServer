@@ -72,16 +72,12 @@ public class UserEntity {
 
     }
 
-    public UserEntity(int id){
-        this.id = id;
-    }
+    public UserEntity(Builder builder) {
 
-    public UserEntity(int id, String name, String login, String password) {
-
-        this.id = id;
-        this.name = name;
-        this.login = login;
-        this.password = password;
+        this.id = builder.id;
+        this.name = builder.name;
+        this.login = builder.login;
+        this.password = builder.password;
     }
 
     public UserEntity(String name, String login, String password) {
@@ -89,5 +85,40 @@ public class UserEntity {
         this.name = name;
         this.login = login;
         this.password = password;
+    }
+
+   public static class Builder {
+        private int id;
+        private String name;
+        private String password;
+        private String login;
+
+        public Builder(){
+
+        }
+
+        public Builder setId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder setPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public Builder setLogin(String login) {
+            this.login = login;
+            return this;
+        }
+
+        public UserEntity build(){
+            return new UserEntity(this);
+        }
     }
 }

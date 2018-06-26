@@ -32,10 +32,10 @@ public class UserServlet extends HttpServlet {
     }
 
     protected void doCreate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserEntity user = new UserEntity(
-                req.getParameter("name"),
-                req.getParameter("login"),
-                req.getParameter("password"));
+        UserEntity user = new UserEntity.Builder()
+                .setName(req.getParameter("name"))
+                .setLogin(req.getParameter("login"))
+                .setPassword(req.getParameter("password")).build();
         userService.createUser(user);
 
         resp.sendRedirect("/users");
@@ -43,11 +43,11 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserEntity user = new UserEntity(
-                Integer.parseInt(req.getParameter("id")),
-                req.getParameter("name"),
-                req.getParameter("login"),
-                req.getParameter("password"));
+        UserEntity user = new UserEntity.Builder()
+                .setId(Integer.parseInt(req.getParameter("id")))
+                .setName(req.getParameter("name"))
+                .setLogin(req.getParameter("login"))
+                .setPassword(req.getParameter("password")).build();
         userService.updateUser(user);
 
         resp.sendRedirect("/users");

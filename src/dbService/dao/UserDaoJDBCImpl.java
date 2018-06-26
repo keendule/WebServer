@@ -23,11 +23,12 @@ public class UserDaoJDBCImpl implements UserDAO {
                         List<UserEntity> list = new ArrayList<>();
                         try {
                             while (x.next()) {
-                                UserEntity user = new UserEntity();
-                                user.setId(x.getInt("id"));
-                                user.setLogin(x.getString("login"));
-                                user.setPassword(x.getString("password"));
-                                user.setName(x.getString("name"));
+
+                                UserEntity user = new UserEntity.Builder()
+                                        .setId(x.getInt("id"))
+                                        .setLogin(x.getString("login"))
+                                        .setPassword(x.getString("password"))
+                                        .setName(x.getString("name")).build();
 
                                 list.add(user);
                             }
@@ -83,21 +84,23 @@ public class UserDaoJDBCImpl implements UserDAO {
         try {
            return executor.execSelectPreparedStatementQuery("Select * FROM users" +
                     " WHERE id = ? ",x -> {
-                UserEntity userDataBase = new UserEntity();
+                UserEntity user = null;
                 try {
 
                     while (x.next()) {
-                        userDataBase.setId(x.getInt("id"));
-                        userDataBase.setLogin(x.getString("login"));
-                        userDataBase.setPassword(x.getString("password"));
-                        userDataBase.setName(x.getString("name"));
+
+                         user = new UserEntity.Builder()
+                                .setId(x.getInt("id"))
+                                .setLogin(x.getString("login"))
+                                .setPassword(x.getString("password"))
+                                .setName(x.getString("name")).build();
 
                     }
                 }catch (SQLException e){
                     e.printStackTrace();
                 }
 
-                return userDataBase;
+                return user;
             },id);
         } catch (SQLException e) {
             e.printStackTrace();
