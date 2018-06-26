@@ -1,9 +1,10 @@
 package servlets.users;
 
 import dbService.services.UserService;
-import entity.UsersEntity;
+import entity.UserEntity;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,13 +17,12 @@ import java.util.List;
 @WebServlet("/users")
 public class UsersServlet extends HttpServlet {
 
-    private UserService userService = new UserService();
-
+    private UserService userService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        List<UsersEntity> users = userService.getAllUsers();
+        List<UserEntity> users = userService.getAllUsers();
 
         req.setAttribute("users",users);
 
@@ -32,6 +32,8 @@ public class UsersServlet extends HttpServlet {
 
     }
 
-
-
+    @Override
+    public void init() {
+        userService = new UserService(getServletContext());
+    }
 }

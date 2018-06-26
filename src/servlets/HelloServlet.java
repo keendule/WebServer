@@ -1,9 +1,11 @@
 package servlets;
 
-import dbService.services.DBService;
-import entity.UsersEntity;
+import dbService.dao.UserDAOFactory;
+import dbService.services.DBHelper;
+import entity.UserEntity;
 import org.hibernate.SessionFactory;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,9 +20,8 @@ public class HelloServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-       SessionFactory sessionFactory = DBService.getSessionFactory();
+        UserDAOFactory userDAOFactory = new UserDAOFactory(getServletContext());
 
-        sessionFactory.openSession().get(UsersEntity.class,37);
 
         PrintWriter writer = resp.getWriter();
 

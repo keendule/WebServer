@@ -1,7 +1,7 @@
 package servlets.users;
 
 import dbService.services.UserService;
-import entity.UsersEntity;
+import entity.UserEntity;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,7 +15,7 @@ import java.io.IOException;
 @WebServlet("/user")
 public class UserServlet extends HttpServlet {
 
-    private UserService userService = new UserService();
+    private UserService userService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -23,7 +23,7 @@ public class UserServlet extends HttpServlet {
         RequestDispatcher dispatcher = req.getRequestDispatcher("users/user.jsp");
 
         if (id != null) {
-          UsersEntity user = userService.getUser(Integer.parseInt(id));
+          UserEntity user = userService.getUser(Integer.parseInt(id));
           req.setAttribute("user",user);
         }
 
@@ -32,7 +32,7 @@ public class UserServlet extends HttpServlet {
     }
 
     protected void doCreate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UsersEntity user = new UsersEntity(
+        UserEntity user = new UserEntity(
                 req.getParameter("name"),
                 req.getParameter("login"),
                 req.getParameter("password"));
@@ -43,7 +43,7 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UsersEntity user = new UsersEntity(
+        UserEntity user = new UserEntity(
                 Integer.parseInt(req.getParameter("id")),
                 req.getParameter("name"),
                 req.getParameter("login"),
@@ -83,5 +83,10 @@ public class UserServlet extends HttpServlet {
                     break;
             }
         }
+    }
+
+    @Override
+    public void init() {
+        userService = new UserService(getServletContext());
     }
 }

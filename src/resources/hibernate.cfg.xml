@@ -7,9 +7,9 @@
         <property name="connection.url">jdbc:mysql://localhost:3306/users_db</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.username">test</property>
-        <property name="connection.password">qwerty</property>
+        <property name="connection.password"></property>
 
-        <mapping class="entity.UsersEntity"/>
+        <mapping class="entity.UserEntity"/>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->

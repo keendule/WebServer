@@ -5,7 +5,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "users", schema = "users_db")
-public class UsersEntity {
+public class UserEntity {
     private int id;
     private String name;
     private String password;
@@ -55,7 +55,7 @@ public class UsersEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UsersEntity that = (UsersEntity) o;
+        UserEntity that = (UserEntity) o;
         return id == that.id &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(password, that.password) &&
@@ -68,15 +68,15 @@ public class UsersEntity {
         return Objects.hash(id, name, password, login);
     }
 
-    public UsersEntity(){
+    public UserEntity(){
 
     }
 
-    public UsersEntity(int id){
+    public UserEntity(int id){
         this.id = id;
     }
 
-    public UsersEntity(int id, String name, String login,String password) {
+    public UserEntity(int id, String name, String login, String password) {
 
         this.id = id;
         this.name = name;
@@ -84,7 +84,7 @@ public class UsersEntity {
         this.password = password;
     }
 
-    public UsersEntity(String name, String login, String password) {
+    public UserEntity(String name, String login, String password) {
 
         this.name = name;
         this.login = login;
