@@ -21,16 +21,16 @@ public class UserDaoJDBCImpl implements UserDAO {
         List<UserEntity> users;
         try {
             users = executor.execCreateStatementQuery("Select * From users",
-                    x -> {
+                    resultSet -> {
                         List<UserEntity> list = new ArrayList<>();
                         try {
-                            while (x.next()) {
+                            while (resultSet.next()) {
 
                                 UserEntity user = new UserEntity.Builder()
-                                        .setId(x.getInt("id"))
-                                        .setLogin(x.getString("login"))
-                                        .setPassword(x.getString("password"))
-                                        .setName(x.getString("name")).build();
+                                        .setId(resultSet.getInt("id"))
+                                        .setLogin(resultSet.getString("login"))
+                                        .setPassword(resultSet.getString("password"))
+                                        .setName(resultSet.getString("name")).build();
 
                                 list.add(user);
                             }
@@ -97,17 +97,17 @@ public class UserDaoJDBCImpl implements UserDAO {
         Executor executor = new Executor(connection);
         try {
            return executor.execSelectPreparedStatementQuery("Select * FROM users" +
-                    " WHERE id = ? ",x -> {
+                    " WHERE id = ? ",resultSet -> {
                 UserEntity user = null;
                 try {
 
-                    while (x.next()) {
+                    while (resultSet.next()) {
 
                          user = new UserEntity.Builder()
-                                .setId(x.getInt("id"))
-                                .setLogin(x.getString("login"))
-                                .setPassword(x.getString("password"))
-                                .setName(x.getString("name")).build();
+                                .setId(resultSet.getInt("id"))
+                                .setLogin(resultSet.getString("login"))
+                                .setPassword(resultSet.getString("password"))
+                                .setName(resultSet.getString("name")).build();
 
                     }
                 }catch (SQLException e){

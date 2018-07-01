@@ -1,4 +1,4 @@
-package dbService.services;
+package dbService.DBConnection;
 
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -11,14 +11,13 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import javax.servlet.ServletContext;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+
 
 
 public class DBHelper {
 
     private static SessionFactory sessionFactory;
-    private static Connection connection;
+    private static JDBCConnectionPool jdbcConnectionPool;
 
     private DBHelper(){
 
@@ -53,21 +52,17 @@ public class DBHelper {
     }
     
     
-    public static Connection getConnection() {
-        if(connection == null)
+    public static JDBCConnectionPool getConnectionPoll() {
+        if(jdbcConnectionPool == null)
             configureConnection();
-        return connection;
+        return jdbcConnectionPool;
     }
 
     private static void configureConnection() {
 
-        try {
-            DriverManager.registerDriver(new com.mysql.jdbc.Driver() );
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/users_db?" +
-                    "user=test&password=");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        jdbcConnectionPool = new JDBCConnectionPool(
+                "com.mysql.jdbc.Driver", "jdbc:mysql://localhost/users_db?",
+                "test", "");
     }
 
 

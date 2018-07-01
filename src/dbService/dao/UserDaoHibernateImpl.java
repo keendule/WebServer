@@ -1,7 +1,6 @@
 package dbService.dao;
 
-import dbService.Exceptions.NoSuchOperationException;
-import dbService.services.DBHelper;
+import dbService.DBConnection.DBHelper;
 import dbService.services.DatabaseOperations;
 import entity.UserEntity;
 import org.hibernate.HibernateException;
@@ -65,7 +64,7 @@ public class UserDaoHibernateImpl implements UserDAO {
                     session.delete(user);
                     break;
                 default:
-                    throw new NoSuchOperationException();
+                    throw new IllegalArgumentException("No such operation implemented");
             }
 
             transaction.commit();

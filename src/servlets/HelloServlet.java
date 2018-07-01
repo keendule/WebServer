@@ -1,11 +1,7 @@
 package servlets;
 
 import dbService.dao.UserDAOFactory;
-import dbService.services.DBHelper;
-import entity.UserEntity;
-import org.hibernate.SessionFactory;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
